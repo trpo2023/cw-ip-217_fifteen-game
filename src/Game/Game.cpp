@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "libgame/game.hpp"
+#include <iostream>
 
 int main()
 {
@@ -14,6 +16,9 @@ int main()
         window.clear();
         window.display();
     }
+
+    create();
+    
 
     return 0;
 }

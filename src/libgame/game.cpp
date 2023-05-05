@@ -1,5 +1,6 @@
 #include "libgame/game.hpp"
 #include <iostream>
+#include <iomanip>
 
 
 bool solved;
@@ -11,16 +12,22 @@ void create()
     for (int i = 0; i < FIELD_SIZE - 1; i++) {
         field[i] = i + 1;
     }
-    int empty = FIELD_SIZE - 1;
+    empty = FIELD_SIZE - 1;
     field[empty] = 0;
     solved = true;
 }
 
 void Print()
 {
-    for(int i = 0; i < FIELD_SIZE; i++)
+    int k = 0;
+    for(int i = 0; i < 4; i++)
     {
-        std::cout << field[i] << " ";
+        for(int j = 0; j < 4; j++)
+        {
+            std::cout << std::setw(4) << field[k] << " ";
+            k++;
+        }
+        std::cout << std::endl;
     }
 }
 
@@ -41,28 +48,28 @@ void move(char direction)
     int flag = -1;
     switch(direction)
     {
-        case 75:
-        if(column < 5)
+        case 71:
+        if(column < 3)
         {
             flag = empty + 1;
         }
         break;
 
-        case 77:
+        case 72:
         if(column > 0)
         {
             flag = empty - 1;
         }
         break;
 
-        case 72:
+        case 73:
         if(row < 3)
         {
             flag = empty + 4;
         }
         break;
 
-        case 80:
+        case 74:
         if(row > 0)
         {
             flag = empty - 4;

@@ -12,3 +12,5 @@ void create();
 bool check();
 
 void Print();
+
+void move(char direction);

@@ -33,3 +33,48 @@ bool check()
     }
     return true;
 }
+
+void move(char direction)
+{
+    int column = empty % 4;
+    int row = empty / 4;
+    int flag = -1;
+    switch(direction)
+    {
+        case 75:
+        if(column < 5)
+        {
+            flag = empty + 1;
+        }
+        break;
+
+        case 77:
+        if(column > 0)
+        {
+            flag = empty - 1;
+        }
+        break;
+
+        case 72:
+        if(row < 3)
+        {
+            flag = empty + 4;
+        }
+        break;
+
+        case 80:
+        if(row > 0)
+        {
+            flag = empty - 4;
+        }
+        break;
+    }
+    if(empty >= 0 && flag >= 0)
+    {
+        int c = field[empty];
+        field[empty] = field[flag];
+        field[flag] = c;
+        empty = flag;
+    }
+    solved = check();
+}

@@ -1,5 +1,8 @@
 #pragma once
-#include "libgame/game.hpp"
 #include <SFML/Graphics.hpp>
+
+const int MENU_SIZE = 300;
+
+void menu();
 
 void window();

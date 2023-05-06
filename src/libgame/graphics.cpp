@@ -1,4 +1,31 @@
 #include "libgame/graphics.hpp"
+#include "libgame/game.hpp"
+
+void menu()
+{
+    sf::Text text;
+    sf::Font font;
+    font.loadFromFile("C:/WINDOWS/Fonts/arial.ttf");
+    text.setFont(font);
+    text.setCharacterSize(52);
+    text.setString("You Win!");
+    text.setPosition(50.f, 100.f);
+    sf::RenderWindow window(sf::VideoMode(MENU_SIZE, MENU_SIZE), "Win");
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+            if(event.type == sf::Event::KeyPressed)
+            {
+                if(event.key.code == sf::Keyboard::Escape) window.close();
+            }
+        }
+        window.clear();
+        window.draw(text);
+        window.display();
+    }
+}
 
 void window()
 {
@@ -13,7 +40,7 @@ void window()
     font.loadFromFile("C:/WINDOWS/Fonts/arial.ttf");
     text.setFont(font);
     text.setCharacterSize(52);
-    sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "Fifteen");
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -25,6 +52,7 @@ void window()
                 if(event.key.code == sf::Keyboard::Right) move(sf::Keyboard::Right);
                 if(event.key.code == sf::Keyboard::Up) move(sf::Keyboard::Up);
                 if(event.key.code == sf::Keyboard::Down) move(sf::Keyboard::Down);
+                if(event.key.code == sf::Keyboard::Escape) window.close();
             }
         }
         window.clear();
@@ -35,11 +63,23 @@ void window()
             {
                 sf::Vector2f position(i % 4 * CELL_SIZE + 10.f, i / 4 * CELL_SIZE + 10.f);
                 shape.setPosition(position);
-                text.setPosition(position.x + 30.f + (field[i] < 10 ? 15.f : 0.f), position.y + 25.f);
+                if(field[i] >= 10)
+                {
+                    text.setPosition(position.x + 30.f, position.y + 25.f);
+                }
+                else
+                {
+                    text.setPosition(position.x + 45.f, position.y + 25.f);
+                }
                 window.draw(shape);
                 window.draw(text);
             }
         }
         window.display();
+        if(check() == true)
+        {
+            menu();
+            mix();
+        }
     }
 }

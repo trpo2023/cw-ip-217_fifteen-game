@@ -3,7 +3,6 @@
 #include <iomanip>
 
 
-bool solved;
 int field[FIELD_SIZE];
 int empty;
 
@@ -14,7 +13,6 @@ void create()
     }
     empty = FIELD_SIZE - 1;
     field[empty] = 0;
-    solved = true;
 }
 
 void Print()
@@ -83,5 +81,14 @@ void move(char direction)
         field[flag] = c;
         empty = flag;
     }
-    solved = check();
+}
+
+void mix()
+{
+    int random_moves = 1000;
+    while(random_moves > 0)
+    {
+        move(71 + rand() % 4);
+        random_moves--;
+    }
 }

@@ -14,3 +14,5 @@ bool check();
 void Print();
 
 void move(char direction);
+
+void mix();

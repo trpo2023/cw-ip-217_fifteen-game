@@ -9,15 +9,18 @@ LIB_GAME = obj/src/libgame
 all: $(GAME_EXE)
 
 $(GAME_EXE): $(OBJ_GAME)/fifteen.o $(LIB_GAME)/libgame.a
-	$(CC) $(CPPFLAGS) -o $@ $^ $(SFMLFLAGS) -lm
+	$(CC) $(CPPFLAGS) -o $@ $^ $(SFMLFLAGS) -lm -mwindows
 
 $(OBJ_GAME)/fifteen.o: $(GAME_CPP)
 	$(CC) $(CPPFLAGS) -MMD -c $< -o $@ -lm
 
-$(LIB_GAME)/libgame.a: $(LIB_GAME)/game.o
+$(LIB_GAME)/libgame.a: $(LIB_GAME)/game.o $(LIB_GAME)/graphics.o
 	ar rcs $@ $^
 
 $(LIB_GAME)/game.o: src/libgame/game.cpp
+	$(CC) $(CPPFLAGS) -MMD -c $< -o $@ -lm
+
+$(LIB_GAME)/graphics.o: src/libgame/graphics.cpp
 	$(CC) $(CPPFLAGS) -MMD -c $< -o $@ -lm
 
 run: $(GAME_EXE)

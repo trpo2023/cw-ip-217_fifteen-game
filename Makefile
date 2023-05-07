@@ -1,9 +1,9 @@
 CC = g++
 CPPFLAGS = -Wall -Wextra -Werror -I src/include -I src
 SFMLFLAGS = -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system
-GAME_CPP = src/Game/fifteen.cpp
-GAME_EXE = bin/Game.exe
-OBJ_GAME = obj/src/Game
+GAME_CPP = src/game/fifteen.cpp
+GAME_EXE = bin/game.exe
+OBJ_GAME = obj/src/game
 LIB_GAME = obj/src/libgame
 TEST_OBJ = obj/test
 

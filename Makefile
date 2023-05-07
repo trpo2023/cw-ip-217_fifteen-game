@@ -5,6 +5,7 @@ GAME_CPP = src/Game/fifteen.cpp
 GAME_EXE = bin/Game.exe
 OBJ_GAME = obj/src/Game
 LIB_GAME = obj/src/libgame
+TEST_OBJ = obj/test
 
 all: $(GAME_EXE)
 
@@ -27,6 +28,20 @@ run: $(GAME_EXE)
 	./$(GAME_EXE)
 
 clean:
-	rm -f bin/*.exe $(OBJ_GAME)/*.d $(OBJ_GAME)/*.o
+	rm -f bin/*.exe $(OBJ_GAME)/*.d $(OBJ_GAME)/*.o $(TEST_OBJ)/*.*
 
--include fifteen.d game.d
+test: bin/game-test.exe
+	bin/game-test.exe
+
+bin/game-test.exe: $(TEST_OBJ)/main.o $(TEST_OBJ)/ctest.o $(LIB_GAME)/libgame.a
+	$(CC) -I src -I thirdparty $^ -o bin/game-test.exe -lm
+
+$(TEST_OBJ)/main.o: test/main.cpp
+	$(CC) $(CPPFLAGS) -MMD -I thirdparty -c $< -o $@
+
+$(TEST_OBJ)/ctest.o: test/ctest.cpp
+	$(CC) $(CPPFLAGS) -MMD -I thirdparty -c $< -o $@
+
+.PHONY: all clean test
+
+-include fifteen.d game.d graphics.d test.d main.d

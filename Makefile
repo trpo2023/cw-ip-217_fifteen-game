@@ -1,7 +1,7 @@
 CC = g++
 CPPFLAGS = -Wall -Wextra -Werror -I src/include -I src
 SFMLFLAGS = -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system
-GAME_CPP = src/game/fifteen.cpp
+GAME_CPP = src/game
 GAME_EXE = bin/game.exe
 OBJ_GAME = obj/src/game
 LIB_GAME = obj/src/libgame
@@ -12,7 +12,7 @@ all: $(GAME_EXE)
 $(GAME_EXE): $(OBJ_GAME)/fifteen.o $(LIB_GAME)/libgame.a
 	$(CC) $(CPPFLAGS) -o $@ $^ $(SFMLFLAGS) -lm -mwindows
 
-$(OBJ_GAME)/fifteen.o: $(GAME_CPP)
+$(OBJ_GAME)/fifteen.o: $(GAME_CPP)/fifteen.cpp
 	$(CC) -MMD $(CPPFLAGS) -c $< -o $@ -lm
 
 $(LIB_GAME)/libgame.a: $(LIB_GAME)/game.o $(LIB_GAME)/graphics.o

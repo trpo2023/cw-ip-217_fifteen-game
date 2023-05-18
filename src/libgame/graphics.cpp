@@ -36,11 +36,13 @@ void window()
 	shape.setFillColor(sf::Color::Transparent);
     shape.setPosition(1, 2);
     sf::Text text;
+    sf::Text text1;
     sf::Font font;
     font.loadFromFile("C:/WINDOWS/Fonts/arial.ttf");
     text.setFont(font);
+    text1.setFont(font);
     text.setCharacterSize(52);
-    sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "Fifteen");
+    sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE+50), "Fifteen");
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -75,6 +77,10 @@ void window()
                 window.draw(text);
             }
         }
+        text1.setString("Up, Down, Left, Right - move                   Esc - exit");
+        text1.setPosition(10, WINDOW_SIZE+10);
+        text1.setCharacterSize(20);
+        window.draw(text1);
         window.display();
         if(check() == true)
         {
